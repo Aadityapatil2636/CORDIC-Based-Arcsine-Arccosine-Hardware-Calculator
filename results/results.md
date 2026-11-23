@@ -2,59 +2,61 @@
 
 ## 1. RTL Schematic
 
-The RTL schematic illustrates the hardware architecture of the CORDIC-based arcsine and arccosine calculator, consisting of a top-level module connected to pipelined CORDIC stages.
+The RTL schematic represents the hardware architecture of the proposed CORDIC-based arcsine and arccosine calculator.
 
+The design consists of a top-level module connected to multiple pipelined CORDIC stages.
 
+![RTL Schematic](rtl_schematic.png)
 
 ## 2. Functional Simulation
 
-Functional simulation was performed using Xilinx Vivado 2023.2.
+Functional simulation was performed using Xilinx Vivado 2023.2 to verify the operation of the Verilog design.
 
-The design calculates arcsine and arccosine values and compares them against reference mathematical functions.
+The simulation waveform shows the clock, reset, input values, and corresponding arcsine and arccosine outputs.
 
-
+![Simulation Waveform](simulation_waveform.png)
 
 ## 3. Numerical Verification
 
+The calculated outputs were compared with the reference mathematical values.
+
 For an input value of x = 0.6, the following results were observed:
 
-| Parameter | Design Output | Reference Output |
-| --------- | ------------: | ---------------: |
-| Arcsine   |      0.643518 |         0.643501 |
-| Arccosine |      0.927278 |         0.927295 |
+| Parameter | Design Output | Reference Output | Absolute Error |
+|---|---:|---:|---:|
+| Arcsine | 0.643518 | 0.643501 | 0.000017 |
+| Arccosine | 0.927278 | 0.927295 | 0.000017 |
 
-The approximate absolute error for both outputs is 1.7 × 10⁻⁵ radians for this test sample.
+The observed absolute error for both outputs is approximately 1.7 × 10⁻⁵ radians for this test sample.
 
+### Simulation Console Output
 
+![Simulation Output](simulation_output.png)
 
 ## 4. FPGA Resource Utilization
 
-Synthesis was performed for the Xilinx Artix-7 FPGA device (xc7a100tcsg324-1).
+Synthesis was performed using Xilinx Vivado 2023.2 for the Artix-7 FPGA device (xc7a100tcsg324-1).
 
-| Resource        |  Used | Utilization |
-| --------------- | ----: | ----------: |
-| Slice LUTs      | 1,584 |       2.50% |
-| Slice Registers | 1,371 |       1.08% |
-| DSP Blocks      |     0 |          0% |
-| Block RAM       |     0 |          0% |
-| Bonded IOBs     |    74 |      35.24% |
+The resource utilization results are shown below.
 
-The implementation uses LUT-based logic and flip-flops without requiring dedicated DSP blocks or block RAM.
+| Resource | Used | Available | Utilization |
+|---|---:|---:|---:|
+| LUT | 1,584 | 63,400 | 2.50% |
+| Flip-Flops | 1,371 | 126,800 | 1.08% |
+| IO | 74 | 210 | 35.24% |
+| DSP Blocks | 0 | 240 | 0% |
+| Block RAM | 0 | 135 | 0% |
 
+The design primarily utilizes LUT-based logic and flip-flops without requiring dedicated DSP blocks or block RAM.
 
+### Resource Utilization Report
 
-## 5. Timing Analysis
+![FPGA Resource Utilization](utilization_report.png)
 
-Timing performance will be documented using the Vivado timing summary.
+## 5. Conclusion
 
-- Clock period: 10 ns (testbench clock)
+The simulation results demonstrate the functional operation of the CORDIC-based arcsine and arccosine calculator.
 
+The synthesis report shows that the design can be mapped onto an Artix-7 FPGA using LUTs and flip-flops, without utilizing dedicated DSP or block RAM resources.
 
-
-## 6. Conclusion
-
-The simulation demonstrates the functional operation of the pipelined CORDIC-based arcsine and arccosine calculator.
-
-The synthesis results show that the design can be implemented using the logic resources of an Artix-7 FPGA, without dedicated DSP or block RAM resources.
-
-Further timing analysis and FPGA board-level testing can be used to evaluate the implementation under actual hardware conditions.
+Further timing analysis and FPGA board-level testing can be performed to evaluate the design under actual hardware conditions.
