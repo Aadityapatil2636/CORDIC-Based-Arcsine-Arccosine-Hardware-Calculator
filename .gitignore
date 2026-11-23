@@ -1,0 +1,22 @@
+
+# Vivado generated files
+*.jou
+*.log
+*.str
+*.wdb
+*.bit
+*.ltx
+
+# Simulation outputs
+*.vcd
+*.vvp
+*.vcd.gz
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
